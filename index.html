@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Form</title>
+	<!-- <meta name="author" content="name"> -->
+	<!-- <meta name="description" content="description here"> -->
+	<!-- <meta name="keywords" content="keywords,here"> -->
+	<!-- <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon"> -->
+	<link rel="stylesheet" href="style.css">
+
+	<script src = "script.js"></script>
+</head>
+<body onmousemove="moveMouse(event);">
+
+	<header>
+		<img src="images/logo/phem-logo-graphic.svg">
+		<img src="images/logo/phem-logo-text.svg">
+	</header>
+<main>
+	<h1>Contact Form</h1>
+	<p>Our site is currently under construction, in the meanwhile you can use this form to contact us for information and business enquiries. The information provided to us using this form will not be shared with third parties unless we are required to do so by law. Read our Privacy Policy for more information.</p>
+	<button onclick="openPolicy();">Privacy Policy</button>
+	
+	<a id="help-area" onmouseenter="helpVideoEnter ()" onmouseleave="helpVideoExit()">
+		<p>Hover here to play a help video</p>
+		<video id="help-video" width="400" height="226" muted onended="this.currentTime=0;this.play()">
+			<source src="images/video/help-video.mp4" type="video/mp4">
+		</video>
+	</a>
+	<form method = "post" action="" validate>
+
+		<fieldset>
+			<legend align="center">Contact information</legend>
+			<label for="first-name">First Name, Last Name</label>
+			<span class="textlabel textlabel-small firstnamelabel"><input type="text" name="first-name" id="first-name" 
+			title="Names must start with a capital letter and at least 2 additional letters or symbols&nbsp;(&nbsp;,&nbsp;-). Multiple first names must be seperated by a space or dash and must also start with capital letters"
+			pattern="([A-Z][A-Za-z'\-,]{1,})|([A-Z][A-Za-z'\-,]{1,} ){1,}([A-Z][A-Za-z'\-,]{1,})"
+			max = "" min = ""
+			placeholder="First Name"
+			oninput = "checkValue(this)"
+			maxlength = "100" required></span>
+			<span class="textlabel textlabel-small lastnamelabel"><input type="text" name="last-name" id="last-name" 
+			title="Names must start with a capital letter and at least 2 additional letters or symbols&nbsp;(&nbsp;,&nbsp;-). Multiple last names must be seperated by a space or dash and must also start with capital letters"
+			pattern="([A-Z][A-Za-z'\-,]{1,})|([A-Z][A-Za-z'\-,]{1,} ){1,}([A-Z][A-Za-z'\-,]{1,})"
+			max = "" min = ""
+			placeholder="Last Name"
+			oninput = "checkValue(this)"
+			maxlength = "100" optional></span>
+			<div id="first-name-error"></div>
+			<div id="last-name-error"></div>
+			
+			<label for="email">Your Email</label>
+			<span class="emaillabel"><input type="email" name="email" id="email" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+			title="Must be a valid email."
+			max = "" min = ""
+			placeholder="email@abc.com"
+			oninput = "checkValue(this)"
+			maxlength = "150" required></span><br>
+			<div id="email-error"></div>
+<!-- Email regexp from
+https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address -->
+			<label for="phone">Your Phone</label>
+			<span class="phonelabel"><input type="tel" name="phone" id="phone"
+			pattern="(\+[0-9]{1,} [0-9]{1,} |\+[0-9]{1,} |0)[0-9]{3} [0-9]{3} [0-9]{3}"
+			title="Australian numbers do not require an area code, e.g. (0123&nbsp;123&nbsp;123). International numbers require an area code e.g. (+61&nbsp;123&nbsp;123&nbsp;123)"
+			max = "" min = ""
+			placeholder="+00 123 456 789"
+			oninput = "checkValue(this)"
+			maxlength = "20" required></span><br>
+			<div id="phone-error"></div>
+
+			<label for="message">Message</label>
+			<span class="textlabel">
+			<textarea name="message" id="message"
+			pattern=""
+			title="Write a message with 20 or more characters(letters,&nbsp;symbols,&nbsp;etc) to send to PHIM Elec Mechatronics."
+			max="" min=""
+			placeholder="Write a 20 character message here"
+			oninput = "checkValue(this)"
+			minlength="20" 
+			maxlength="50000" required></textarea>
+			</span><br>
+			<div id="message-error"></div>
+
+			<label class="nohide" for="consent">I wish to be added to the mailing list</label>
+			<span class="checkbox-span">
+			<input type="checkbox" name="mail-list" id="mail-list"
+			title="Check whether you would like to receive updates. This is optional."
+			max="" min=""
+			maxlength="">
+			</span>
+			<div id="mail-list-error"></div>
+			
+			<label class="nohide" for="understand-privacy">I understand the Privacy Policy</label>
+			<span class="checkbox-span understandprivacylabel">
+				<input type="checkbox" name="understand-privacy" id="understand-privacy"
+			title="You must accept the conditions of the privacy policy."
+			max="" min=""
+			maxlength="" required>
+			</span>
+			<div id="privacy-error"></div>
+
+		</fieldset>
+			<input type="submit" value="Send" onsubmit="">
+
+	</form>
+	<!--
+		There are linebreaks in the form, as in the case the css doesn't load the site will still look somewhat correct.
+		The CSS ignores the linebreaks anyways so it doesn't have much of a negative effect because of the grid layout.
+
+		Spans are used because ::after does not work on input text fields
+	-->
+	</main>	
+
+	<div id="privacy-window">
+		<button onclick="closePolicy();"><img src="images/icons/close.svg"></button>
+		<h2>Privacy Policy</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget viverra nunc, ac aliquam augue. Suspendisse potenti. Sed lacinia nisi a pharetra condimentum. Suspendisse potenti. Nulla rhoncus magna id mi condimentum, vitae facilisis massa aliquam. Fusce eu tincidunt eros, id eleifend massa. Ut orci eros, semper rutrum tincidunt ultricies, ullamcorper eu lectus. Fusce hendrerit pretium fermentum. Maecenas eu posuere lectus. Integer non orci arcu. Aenean ut venenatis magna, at feugiat dolor. Praesent ac semper tellus. Nunc convallis lobortis neque sit amet lobortis.</p>
+		<p>Fusce ultrices ante vitae magna sollicitudin, a auctor mi viverra. Vestibulum finibus, orci in fringilla euismod, massa leo pulvinar tortor, ut sodales lectus lacus sit amet eros. Suspendisse potenti. Vivamus pretium finibus quam porta pellentesque. Praesent eget vulputate est, vitae interdum elit. Vivamus ac ultrices velit. Etiam ut orci imperdiet nibh imperdiet blandit condimentum at enim.</p>
+		<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed nisi sapien, interdum sit amet nibh eget, tincidunt eleifend risus. Sed nisi odio, pellentesque eget faucibus pretium, malesuada quis massa. Phasellus gravida iaculis urna id auctor. Sed et ipsum vel nisi accumsan pellentesque. Morbi ac leo est. Fusce placerat interdum mi, ut imperdiet erat pharetra nec.</p>
+		<p>Vestibulum ut arcu feugiat, bibendum eros eu, ultricies tellus. Donec cursus sit amet erat ac rutrum. Nunc eget aliquam metus. Cras dictum luctus orci et feugiat. Pellentesque sodales finibus enim sed pulvinar. Cras volutpat mi ac quam cursus cursus. Suspendisse sit amet dictum metus. Praesent et ullamcorper orci. Pellentesque rutrum sapien erat, fermentum semper mauris pellentesque accumsan. Duis nec elit in neque iaculis molestie nec nec erat.</p>
+		<p>Proin ut finibus nibh. Maecenas porttitor magna id mi imperdiet, eu iaculis odio porta. Sed quis elit feugiat, auctor quam a, suscipit ex. Vestibulum enim justo, venenatis vitae leo vitae, finibus viverra enim. Vivamus in nibh sem. Nulla eleifend, tellus in facilisis dictum, justo turpis congue leo, eu rhoncus ipsum sem nec arcu. Donec at metus augue. Pellentesque lobortis maximus dui, id tincidunt velit posuere id. Suspendisse a eros faucibus, sollicitudin velit eu, ultricies libero. Suspendisse quis tristique massa, sit amet sodales libero. Donec tempus ex neque, at congue purus interdum vitae. Nam et sodales massa. Morbi at pretium sapien. </p>
+	</div>
+	<footer>
+			<img src="images/icons/copy.svg"><p>Paul Humphres</p>
+			<img src="images/icons/email.svg"><p>email@abc.com</p>
+			<img src="images/icons/phone.svg"><p>+61 123 123 123</p>
+			<p>Page by Hayden Blomfield</p>
+	</footer>
+</body>
+</html>
